@@ -11,3 +11,4 @@ class Kele
     @user_auth_token = post_response['auth_token']
     raise "Invalid Email or Password. Try Again." if @user_auth_token.nil?
   end
+end
