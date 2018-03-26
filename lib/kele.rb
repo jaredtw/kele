@@ -11,4 +11,10 @@ class Kele
     @user_auth_token = post_response['auth_token']
     raise "Invalid Email or Password. Try Again." if @user_auth_token.nil?
   end
+
+  def get_me
+    response = self.class.get('/users/me', headers: { "authorization" => @user_auth_token })
+    JSON.parse(response.body)
+  end
+    
 end
