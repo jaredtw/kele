@@ -20,10 +20,15 @@ class Kele
     JSON.parse(response.body)
   end
 
-  def get_mentor_availability
-      @mentor_id = 0078
-      response = self.class.get('/mentors/0078/student_availability', headers: { "authorization" => @user_auth_token })
-      JSON.parse(response.body)
+  def get_mentor_availability(mentor_id)
+      response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @user_auth_token })
+      open = []
+      JSON.parse(response.body).each do |availability|
+        if availability["booked"] == nil
+          open << availability
+        end
+      end
+      open
   end
 
 end
